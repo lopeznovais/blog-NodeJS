@@ -23,7 +23,8 @@
         app.use(session({
             secret: "nodejs",
             receive: true,
-            saveUninitialized: true
+            saveUninitialized: true,
+            resave: true,
         }))
 
         app.use(passport.initialize())
@@ -46,7 +47,7 @@
         app.set("view engine", "handlebars")
     // Mongoose
         mongoose.Promise = global.Promise
-        mongoose.connect(db.mongoURI, { useNewUrlParser: true }).then(() =>{
+        mongoose.connect(db.mongoURI, { useNewUrlParser: true , useUnifiedTopology: true}).then(() =>{
             console.log("Conectado ao mongoDB")
         }).catch((err) => {
             console.log("Erro ao se conectar ao mongoDB " + err)
